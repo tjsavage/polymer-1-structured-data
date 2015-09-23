@@ -1,0 +1,15 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="broken-microdata-element">
+  <template>
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <span itemprop="price" content="100">100</span>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: "broken-microdata-element"
+    });
+  </script>
+</dom-module>
