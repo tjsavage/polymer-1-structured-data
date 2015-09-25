@@ -8,19 +8,25 @@
     .test {
       margin-bottom: 20px;
       margin-top: 20px;
-      border-bottom: thick red;
     }
   </style>
 </head>
 
 <div class="test">
   <h1>raf</h1>
+  <p>Does window.requestAnimationFrame exist?</p>
   <div id="raf-test">
   </div>
   <script>
-    requestAnimationFrame(function() {
-      document.getElementById("raf-test").textContent = "raf exists!";
-    });
+    if(!window.requestAnimationFrame) {
+      setTimeout(function() {
+        document.getElementById("raf-test").textContent = "no native raf, setTimeout works";
+      }, 0);
+    } else {
+      window.requestAnimationFrame(function() {
+        document.getElementById("raf-test").textContent = "native raf exists!";
+      });
+    }
   </script>
 </div>
 
@@ -44,11 +50,13 @@
 
 <div class="test">
   <h1>microdata</h1>
-  <p>Does microdata render?</p>
+  <p>Does microdata render? Waiting for element to attach...</p>
+  <p id="microdata-test-preface"></p>
   <p id="microdata-test"></p>
   <microdata-element id="microdata-element"></microdata-element>
   <script>
     document.getElementById("microdata-element").addEventListener("attached", function() {
+      document.getElementById("microdata-test-preface").textContent = "got attached event - now do we have the microdata attributes?"
       var microdataElement = document.querySelector("[itemprop=offers]");
 
       document.getElementById("microdata-test").textContent = microdataElement ? "yes" : "nope";
