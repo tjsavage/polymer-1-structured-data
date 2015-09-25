@@ -1,0 +1,126 @@
+<head>
+  <script>
+    (function() {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+  }());
+  </script>
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="bower_components/polymer/polymer.html">
+  <link rel="import" href="./microdata-element.html">
+  <link rel="import" href="./databinding-element.html">
+
+  <style>
+    .test {
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<div class="test">
+  <h1>raf</h1>
+  <p>Does window.requestAnimationFrame exist?</p>
+  <div id="raf-test">
+  </div>
+  <script>
+    if(!window.requestAnimationFrame) {
+      setTimeout(function() {
+        document.getElementById("raf-test").textContent = "no native raf, setTimeout works";
+      }, 0);
+    } else {
+      window.requestAnimationFrame(function() {
+        document.getElementById("raf-test").textContent = "native raf exists!";
+      });
+    }
+  </script>
+</div>
+
+<div class="test">
+  <h1>webkitRequestAnimationFrame</h1>
+  <p>Does window.webkitRequestAnimationFrame exist?</p>
+  <div id="webkit-raf-test">
+  </div>
+  <script>
+    if(!window.webkitRequestAnimationFrame) {
+      setTimeout(function() {
+        document.getElementById("webkit-raf-test").textContent = "no webkitraf, setTimeout";
+      }, 0);
+    } else {
+      window.webkitRequestAnimationFrame(function() {
+        document.getElementById("webkit-raf-test").textContent = "yes, webkitraf exists";
+      });
+    }
+  </script>
+</div>
+
+<div class="test">
+  <h1>microdata</h1>
+  <p>Does microdata render? Waiting for element to attach...</p>
+  <p id="microdata-test-preface"></p>
+  <p id="microdata-test"></p>
+  <microdata-element id="microdata-element"></microdata-element>
+  <script>
+    document.getElementById("microdata-element").addEventListener("attached", function() {
+      document.getElementById("microdata-test-preface").textContent = "got attached event - now do we have the microdata attributes?"
+      var microdataElement = document.querySelector("[itemprop=offers]");
+
+      document.getElementById("microdata-test").textContent = microdataElement ? "yes" : "nope";
+    });
+  </script>
+</div>
+
+<div class="test">
+  <h1>databinding</h1>
+  <databinding-element></databinding-element>
+</div>
+
+<div class="test">
+  <h1>dom-bind</h1>
+  <template is="dom-bind" id="dombind">
+    <div>{{ val }}</div>
+    <script>
+      setTimeout(function() {
+        document.getElementById("dombind").val = "dom-bind worked!";
+      }, 1000);
+    </script>
+  </template>
+</div>
+
+<div class="test">
+  <h1>render time</h1>
+  <p>This prints the number of milliseconds that js runs for.</p>
+  <div id="render-time-content"></div>
+  <script>
+    var stampEvery100ms = function(ms) {
+      setTimeout(function() {
+        document.getElementById("render-time-content").textContent = ms;
+        stampEvery100ms(ms + 100);
+      }, 100);
+    }
+
+    stampEvery100ms(0);
+  </script>
+</div>
