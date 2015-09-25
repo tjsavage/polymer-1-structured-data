@@ -52,10 +52,12 @@
 <div class="test">
   <h1>microdata</h1>
   <p>Does microdata render?</p>
+  <p id="microdata-test-preface"></p>
   <p id="microdata-test"></p>
   <microdata-element id="microdata-element"></microdata-element>
   <script>
     document.getElementById("microdata-element").addEventListener("attached", function() {
+      document.getElementById("microdata-test-preface").textContent = "got attached event - now do we have the microdata attributes?"
       var microdataElement = document.querySelector("[itemprop=offers]");
 
       document.getElementById("microdata-test").textContent = microdataElement ? "yes" : "nope";
