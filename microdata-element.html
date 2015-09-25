@@ -2,7 +2,7 @@
 <dom-module id="microdata-element">
   <template>
     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-      <span itemprop="price" content="100"></span>
+      <span itemprop="price" content="100" id="attached"></span>
     </div>
   </template>
 
@@ -10,6 +10,7 @@
     Polymer({
       is: "microdata-element",
       attached: function() {
+        this.$.attached.textContent = "microdata-element was attached";
         this.fire('attached');
       }
     });
