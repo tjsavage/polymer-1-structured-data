@@ -1,0 +1,21 @@
+<dom-module id="databinding-element">
+  <template>
+    <div>
+      <span>{{ val }}</span>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'databinding-element',
+      properties: {
+        val: {
+          type: String,
+          value: function() {
+            return "databinding-element"
+          }
+        }
+      }
+    });
+  </script>
+</dom-module>
