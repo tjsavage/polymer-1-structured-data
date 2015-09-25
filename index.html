@@ -96,3 +96,28 @@
     stampEvery100ms(0);
   </script>
 </div>
+
+<div class="test">
+  <h1>Actual Time</h1>
+  <p>This prints actual timestamps</p>
+  <div id="first-time"></div>
+  <div id="actual-time"></div>
+  <div id="ms-elapsed"></div>
+  <script>
+      var d = new Date();
+      var n = d.getTime();
+      document.getElementById("first-time").textContent = n;
+
+      var stampEvery100ms = function(ms) {
+        setTimeout(function() {
+          var d = new Date();
+          var n = d.getTime();
+          document.getElementById("actual-time").textContent = n;
+          document.getElementById("ms-elapsed").textContent = ms;
+          stampEvery100ms(ms + 100);
+        }, 100);
+      }
+
+      stampEvery100ms(0);
+  </script>
+</div>
