@@ -39,3 +39,31 @@
   <h1>databinding</h1>
   <databinding-element></databinding-element>
 </div>
+
+<div class="test">
+  <h1>dom-bind</h1>
+  <template is="dom-bind" id="dombind">
+    <div>{{ val }}</div>
+    <script>
+      setTimeout(function() {
+        document.getElementById("dombind").val = "dom-bind worked!";
+      }, 1000);
+    </script>
+  </template>
+</div>
+
+<div class="test">
+  <h1>render time</h1>
+  <p>This prints the number of milliseconds that js runs for.</p>
+  <div id="render-time-content"></div>
+  <script>
+    var stampEvery100ms = function(ms) {
+      setTimeout(function() {
+        document.getElementById("render-time-content").textContent += ", " + ms;
+        stampEvery100ms(ms + 100);
+      }, 100);
+    }
+
+    stampEvery100ms(0);
+  </script>
+</div>
