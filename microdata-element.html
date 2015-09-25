@@ -2,13 +2,16 @@
 <dom-module id="microdata-element">
   <template>
     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-      <span itemprop="price" content="100">Microdata Element</span>
+      <span itemprop="price" content="100"></span>
     </div>
   </template>
 
   <script>
     Polymer({
-      is: "microdata-element"
+      is: "microdata-element",
+      attached: function() {
+        this.fire('attached');
+      }
     });
   </script>
 </dom-module>

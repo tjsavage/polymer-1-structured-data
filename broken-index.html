@@ -19,14 +19,41 @@
   </div>
   <script>
     requestAnimationFrame(function() {
-      document.getElementById("raf-test").textContent = "raf";
+      document.getElementById("raf-test").textContent = "raf exists!";
     });
   </script>
 </div>
 
 <div class="test">
+  <h1>webkitRequestAnimationFrame</h1>
+  <p>Does window.webkitRequestAnimationFrame exist?</p>
+  <div id="webkit-raf-test">
+  </div>
+  <script>
+    if(!window.webkitRequestAnimationFrame) {
+      setTimeout(function() {
+        document.getElementById("webkit-raf-test").textContent = "no webkitraf, setTimeout";
+      }, 0);
+    } else {
+      window.webkitRequestAnimationFrame(function() {
+        document.getElementById("webkit-raf-test").textContent = "yes, webkitraf exists";
+      });
+    }
+  </script>
+</div>
+
+<div class="test">
   <h1>microdata</h1>
-  <microdata-element></microdata-element>
+  <p>Does microdata render?</p>
+  <p id="microdata-test"></p>
+  <microdata-element id="microdata-element"></microdata-element>
+  <script>
+    document.getElementById("microdata-element").addEventListener("attached", function() {
+      var microdataElement = document.querySelector("[itemprop=offers]");
+
+      document.getElementById("microdata-test").textContent = microdataElement ? "yes" : "nope";
+    });
+  </script>
 </div>
 
 <div class="test">
@@ -53,7 +80,7 @@
   <script>
     var stampEvery100ms = function(ms) {
       setTimeout(function() {
-        document.getElementById("render-time-content").textContent += ", " + ms;
+        document.getElementById("render-time-content").textContent = ms;
         stampEvery100ms(ms + 100);
       }, 100);
     }
