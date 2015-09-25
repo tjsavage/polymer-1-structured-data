@@ -44,14 +44,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     _catchFirstRender: function() {
-      if (requestAnimationFrame) {
-        requestAnimationFrame(function() {
+      if (window.requestAnimationFrame) {
+        window.requestAnimationFrame(function() {
           Polymer.RenderStatus._makeReady();
         });
       } else {
         setTimeout(function() {
           Polymer.RenderStatus._makeReady();
-        });
+        }, 0);
       }
 
     }
