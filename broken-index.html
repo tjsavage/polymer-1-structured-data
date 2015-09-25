@@ -1,7 +1,35 @@
 <head>
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="bower_components/polymer/polymer.html">
-  <link rel="import" href="./broken-microdata-element.html">
+  <link rel="import" href="./microdata-element.html">
+  <link rel="import" href="./databinding-element.html">
+
+  <style>
+    .test {
+      margin-bottom: 20px;
+      margin-top: 20px;
+      border-bottom: thick red;
+    }
+  </style>
 </head>
 
-<broken-microdata-element></broken-microdata-element>
+<div class="test">
+  <h1>raf</h1>
+  <div id="raf-test">
+  </div>
+  <script>
+    requestAnimationFrame(function() {
+      document.getElementById("raf-test").textContent = "raf";
+    });
+  </script>
+</div>
+
+<div class="test">
+  <h1>microdata</h1>
+  <microdata-element></microdata-element>
+</div>
+
+<div class="test">
+  <h1>databinding</h1>
+  <databinding-element></databinding-element>
+</div>
