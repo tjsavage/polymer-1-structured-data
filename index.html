@@ -76,6 +76,9 @@
       document.addEventListener('test-custom', function(e) {
         document.querySelector("#custom-event-success").textContent = "Custom events work!"
       });
+
+      var event = new Event('test-custom');
+      event.dispatchEvent(event);
   </script>
 </div>
 
