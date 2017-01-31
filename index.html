@@ -70,6 +70,16 @@
 </div>
 
 <div class="test">
+  <h1>Custom Events</h1>
+  <p id="custom-event-success">No custom events :(</p>
+  <script>
+      document.addEventListener('test-custom', function(e) {
+        document.querySelector("#custom-event-success").textContent = "Custom events work!"
+      });
+  </script>
+</div>
+
+<div class="test">
   <h1>dom-bind</h1>
   <template is="dom-bind" id="dombind">
     <div>{{ val }}</div>
