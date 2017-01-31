@@ -1,4 +1,14 @@
 <head>
+  <script>
+    setTimeout(function() {
+      var errorEl = document.querySelector("#error");
+      window.onerror = function(e) {
+        console.log("ERROR!");
+        errorEl.textContent("THERE WAS AN ERROR")
+      }
+    }, 0);
+  </script>
+
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="./polymer/polymer.html">
   <link rel="import" href="./microdata-element.html">
@@ -29,6 +39,7 @@
     }
   </script>
 </div>
+<h1 id="error"></h1>
 
 <div class="test">
   <h1>webkitRequestAnimationFrame</h1>
@@ -78,6 +89,21 @@
       });
 
       var event = new Event('test-custom');
+      document.dispatchEvent(event);
+  </script>
+</div>
+
+<div class="test">
+  <h1>Custom Events with Detail</h1>
+  <p id="custom-event-success">No custom events with detail :(</p>
+  <script>
+      document.addEventListener('test-custom', function(e) {
+        if (e.detail == "hi") {
+          document.querySelector("#custom-event-success").textContent = "Custom events with detail work!"
+        }
+      });
+
+      var event = new CustomEvent('test-custom', {'detail': "hi"});
       document.dispatchEvent(event);
   </script>
 </div>
@@ -134,3 +160,7 @@
       stampEvery100ms(0);
   </script>
 </div>
+
+<script>
+document.nope();
+</script>
