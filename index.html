@@ -95,11 +95,11 @@
 
 <div class="test">
   <h1>Custom Events with Detail</h1>
-  <p id="custom-event-success">No custom events with detail :(</p>
+  <p id="custom-event-detail-success">No custom events with detail :(</p>
   <script>
       document.addEventListener('test-custom', function(e) {
         if (e.detail == "hi") {
-          document.querySelector("#custom-event-success").textContent = "Custom events with detail work!"
+          document.querySelector("#custom-event-detail-success").textContent = "Custom events with detail work!"
         }
       });
 
